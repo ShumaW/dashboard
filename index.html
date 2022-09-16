@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <title>Dashboard</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+        :root {
+            --main-bg: #f6f7ff;
+        }
+
+        * {
+            box-sizing: border-box;
+
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            background: var(--main-bg);
+            height: 100vh;
+            width: 187px;
+            padding: 20px;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            border-right: solid #e9e7f3 1px;
+        }
+
+        main {
+            margin-left: 180px;
+
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--main-bg);
+            height: 50vh;
+            margin: -130px 0 0 0;
+            padding: 0 40px 0 40px;
+            border-bottom: solid #e9e7f3 1px;
+        }
+
+        .logo {
+            font-size: large;
+            font-weight: 900;
+            color: #655e97;
+            background: #f6f7ff;
+            text-align: center;
+            height: 10vh;
+
+        }
+
+        .link {
+            text-decoration: none;
+            color: #a0a1aa;
+        }
+
+        .link--bold {
+            font-weight: 600;
+        }
+
+        .link--medium {
+            font-size: 1.25rem;
+        }
+
+        .menu {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: #f6f7ff;
+            height: 65vh;
+        }
+
+        .menu__list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .menu__link,
+        .cards__link {
+            display: flex;
+            justify-content: space-between;
+            text-decoration: none;
+            align-items: center;
+
+        }
+
+        .menu__link:hover {
+            color: dimgrey;
+            background: lightgray;
+        }
+
+        .menu__icon--medium {
+            font-size: 1.5rem;
+        }
+
+        .menu__icon--small {
+            font-size: .7rem;
+        }
+
+        .menu__item-name,
+        .cards__item-name {
+            font-size: .75rem;
+            font-weight: 500;
+            color: #b8b8c1;
+        }
+
+        .menu__text {
+            display: flex;
+            align-items: center;
+        }
+
+        .menu__subtitle {
+            margin: 0;
+        }
+
+        .help {
+            height: 180px;
+            background: linear-gradient(90deg, #fbefe1, #e0e0f9);
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+        }
+
+        .help__button {
+            height: 35px;
+            width: 118px;
+            margin: 0 0 10px 0;
+            border: none;
+            background: white;
+            border-radius: 10px;
+            font-size: small;
+            font-weight: 700;
+        }
+
+        .help__link {
+            text-decoration: none;
+            color: black;
+            font-weight: 800;
+            font-size: smaller;
+        }
+
+        .help__text {
+            text-align: center;
+            font-size: small;
+            color: #a79f9b;
+        }
+
+        .search {
+            background: white;
+            display: flex;
+            align-items: center;
+            padding-left: .5rem;
+            border-radius: 4px;
+        }
+
+        .search__input {
+            background: none;
+            border: none;
+            outline: none;
+            font-size: .7rem;
+        }
+
+        .search__icon {
+            font-size: 1.5rem;
+            color: #bebebe;
+            transform: rotateY(180deg);
+        }
+
+        .search__input::placeholder {
+            color: #bebebe;
+            font-weight: 600;
+        }
+
+
+        .header-user {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .mr-4 {
+            margin-right: 1rem;
+        }
+
+        .avatar {
+            border-radius: 6px;
+            box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        }
+
+        .link *:not(:last-child) {
+            margin-right: 2rem;
+        }
+
+        .cards__one {
+            height: 50mm;
+            width: 85mm;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            margin: 0 5px 0 0;
+            background: linear-gradient(90deg, #fbefe1, #e0e0f9);
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        }
+
+        .cards__one:hover {
+            box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+        }
+
+        .cards__two {
+            height: 50mm;
+            width: 85mm;
+            border-radius: 20px;
+            margin: 0 5px 0 0;
+            background: linear-gradient(90deg, #ffebcb, #fee1eb);
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+
+        .cards__two:hover {
+            box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px
+        }
+
+        .cards__two-middle {
+            display: flex;
+            justify-content: flex-start;
+
+        }
+
+        .cards__three {
+            height: 50mm;
+            width: 85mm;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            margin: 0 5px 0 0;
+            background: linear-gradient(90deg, #defdbc, #ebfeea);
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+
+        }
+
+        .cards__three:hover {
+            box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px
+        }
+
+        .cards__icon {
+            font-size: 2rem;
+            margin: 7px 14px 0 25px;
+        }
+
+        .cards__icon-green {
+            font-size: 2rem;
+            margin: 0 14px 0 25px;
+        }
+
+        .cards__text {
+            display: flex;
+            justify-content: space-around;
+
+        }
+
+        .cards__text-number {
+            margin: 7px 0 0 15px;
+            font-size: .5rem;
+        }
+
+        .cards__number {
+            margin: 0 0 0 15px;
+            font-size: medium;
+            text-align: justify;
+        }
+
+        .cards {
+            display: flex;
+            justify-content: space-around;
+            margin-top: -110px;
+            padding: 0 40px 0 40px;
+        }
+
+        .cards__text-middle {
+            display: grid;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .cards__text-red {
+            color: red;
+            position: absolute;
+            margin: 0;
+        }
+
+        .cards__text-right1 {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start
+        }
+
+        .cards__text-right2 {
+            display: flex;
+        }
+
+        .button-icon {
+            background: none;
+            border: none;
+            font-size: 1.75rem;
+            cursor: pointer;
+        }
+
+        .button-icon:hover {
+            color: #51459f;
+        }
+
+        .mr-2 {
+            margin-right: .5rem;
+        }
+
+
+        .cards__valid,
+        .cards__holder {
+            margin: 0;
+            font-size: .5rem;
+        }
+
+        .cards__date,
+        .cards__name {
+            margin: 0;
+            font-size: 0.83rem;
+            font-weight: bold;
+        }
+
+        .diagramme {
+            display: flex;
+            justify-content: space-between;
+            margin: 40px 45px 0 44px;
+
+            padding: 0 0 40px 0;
+            border-top: solid #e9e7f3 1px;
+            border-bottom: solid #e9e7f3 1px;
+        }
+
+        .diagramme__one {
+            padding-left: 20px;
+            width: calc(100% / 6);
+        }
+
+        .diagramme__char {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            width: 50%;
+            padding-left: 20px;
+        }
+
+        .diagramme__char-bar {
+            width: 10%;
+            height: 90%;
+            background-color: #e5ecf5;
+            margin: 0 5px;
+            border-radius: 5px;
+        }
+
+        .h100 {
+            height: 100%;
+        }
+
+        .h90 {
+            height: 90%;
+        }
+
+        .h80 {
+            height: 80%;
+        }
+
+        .h70 {
+            height: 70%;
+        }
+
+        .h60 {
+            height: 60%;
+        }
+
+        .h50 {
+            height: 50%;
+        }
+
+        .h40 {
+            height: 40%;
+        }
+
+        .h30 {
+            height: 30%;
+        }
+
+        .h20 {
+            height: 20%;
+        }
+
+        .h10 {
+            height: 10%;
+        }
+
+
+
+        .diagramme__char-bar--orange {
+            background-color: #fb896b;
+            box-shadow: #fb896b5c 0px 20px 20px;
+        }
+
+        .diagramme__char-bar--blue {
+            background-color: #51459f;
+            box-shadow: #51459f5c 0px 20px 20px;
+        }
+
+        .diagramme__char-bar--green {
+            background-color: #18dfbe;
+            box-shadow: #18dfbe5c 0px 20px 20px;
+        }
+
+        .diagramme__text {
+            margin: 35px 0 0 0;
+            color: #7f7f7f;
+        }
+
+        .diagramme__month {
+            margin: -15px 0 0 0;
+            color: #b0b0b0;
+        }
+
+        .diagramme__digit {
+            display: flex;
+            align-items: center;
+            /* justify-content: space-between; */
+            margin: -19px 0 0 0;
+        }
+
+        .diagramme__meaning-red {
+            color: #e89079;
+        }
+
+        .diagramme__meaning-purple {
+            color: #514697;
+        }
+
+        .diagramme__meaning-green {
+            color: #41dbc2;
+        }
+
+        .diagramme__fallrise {
+            width: 35px;
+            height: 17px;
+            text-align: center;
+            border-radius: 9px;
+            margin: 0 0 0 16px;
+        }
+
+        .diagramme__fallrise-green {
+            color: #486c5d;
+            background: #dffaef;
+        }
+
+        .diagramme__fallrise-purple {
+            color: #635b97;
+            background: #dddaeb;
+
+        }
+
+        .diagramme__fallrise-lightgreen {
+            color: #69e5d4;
+            background: #d7faf5;
+
+        }
+
+        .diagramme__item {
+            display: flex;
+            width: 640px;
+            justify-content: space-between;
+            margin-right: 10px;
+        }
+
+        .is-centred {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .transaction {
+            display: flex;
+            justify-content: space-between;
+            margin: 40px 70px 0 60px;
+            padding: 0 0 40px 0;
+
+        }
+
+        .transaction__text {
+            padding-left: 10px;
+        }
+
+        .transaction_latest {
+            display: flex;
+            flex-direction: column;
+            background: #fcfbff;
+            width: 66%;
+            border-radius: 20px;
+            padding: 20px;
+
+        }
+
+        .transaction__lineone,
+        .transaction__line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: .8rem;
+        }
+
+
+        .transaction__img {
+            height: 40px;
+            width: 40px;
+        }
+
+        .transaction__to {
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .transaction__up {
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            width: 36%;
+        }
+
+        .transaction__up-mean {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            padding-left: 10px;
+        }
+
+        .transaction__up-bill {
+            margin: 0;
+        }
+
+        .transaction__up-performance {
+            margin: 0;
+        }
+
+        .transaction__day {
+            color: #999999;
+
+        }
+
+        .is-red {
+            color: #9a6361;
+        }
+
+        .burger {
+            font-size: 3rem;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(calc(330px * -1));
+                transition: all .5s ease-out;
+                width: 330px;
+                z-index: 1;
+            }
+
+            .sidebar--open {
+                transform: none;
+            }
+
+            main {
+                margin: 0;
+            }
+
+            .burger {
+                position: fixed;
+                top: 0;
+                left: 0;
+                display: block;
+                font-size: 3rem;
+                /* border: 1px solid; */
+                transition: all .5s ease-out;
+                cursor: pointer;
+                /* только для разработки */
+            }
+
+            .burger--open {
+                left: 330px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="burger" onclick="toggleMenu()">
+            <svg width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"
+                stroke-linecap="butt" stroke-linejoin="arcs">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+
+        </div>
+        <aside class="sidebar">
+            <div class="logo">Super Finti</div>
+
+            <nav class="menu">
+                <h5 class="menu__subtitle">Main Navigation</h5>
+
+                <ul class="menu__list">
+
+                    <li class="menu__item">
+                        <a href="./" class="menu__link">
+                            <span class="menu__text">
+                                <span class="menu__icon menu__icon--medium">
+                                    <i class="las la-th-large"></i>
+                                </span>
+
+                                <span class="menu__item-name">Dashboard </span>
+                            </span>
+
+                            <span class="menu__icon menu__icon--small mr-2">
+                                <i class="las la-angle-right"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" class="menu__link">
+                            <span class="menu__text">
+                                <span class="menu__icon menu__icon--medium">
+                                    <i class="las la-expand"></i>
+                                </span>
+                                <span class="menu__item-name">Transactions</span>
+                            </span>
+                            <span class="menu__icon menu__icon--small mr-2">
+                                <i class="las la-angle-right"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" class="menu__link">
+                            <span class="menu__text">
+                                <span class="menu__icon menu__icon--medium">
+                                    <i class="las la-th-large"></i>
+                                </span>
+                                <span class="menu__item-name">Contacts</span>
+                            </span>
+                            <span class="menu__icon menu__icon--small mr-2">
+                                <i class="las la-angle-right"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" class="menu__link">
+                            <span class="menu__text">
+                                <span class="menu__icon menu__icon--medium">
+                                    <i class="las la-th-large"></i>
+                                </span>
+                                <span class="menu__item-name">Features</span>
+                            </span>
+                            <span class="menu__icon menu__icon--small mr-2">
+                                <i class="las la-angle-right"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" class="menu__link">
+                            <span class="menu__text">
+                                <span class="menu__icon menu__icon--medium">
+                                    <i class="las la-th-large"></i>
+                                </span>
+                                <span class="menu__item-name">Library</span>
+                            </span>
+                            <span class="menu__icon menu__icon--small mr-2">
+                                <i class="las la-angle-right"></i>
+                            </span>
+                        </a>
+                    </li>
+
+                </ul>
+
+
+
+                <h5 class="menu__subtitle">Settings & Schedules</h5>
+                <ul class="menu__list">
+                    <li class="menu__item">
+                        <a href="./" class="menu__link">
+                            <span class="menu__text">
+                                <span class="menu__icon menu__icon--medium">
+                                    <i class="las la-cube"></i>
+                                </span>
+
+                                <span class="menu__item-name">Base Wallet</span>
+                            </span>
+
+                            <span class="menu__icon menu__icon--small mr-2">
+                                <i class="las la-angle-right"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="menu__item">
+                        <a href="./" class="menu__link">
+                            <span class="menu__text">
+                                <span class="menu__icon menu__icon--medium">
+                                    <i class="las la-map-marked-alt"></i>
+                                </span>
+
+                                <span class="menu__item-name">My Contacts</span>
+                            </span>
+
+                            <span class="menu__icon menu__icon--small mr-2">
+                                <i class="las la-angle-right"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="menu__item">
+                        <a href="./" class="menu__link">
+                            <span class="menu__text">
+                                <span class="menu__icon menu__icon--medium">
+                                    <i class="las la-globe"></i>
+                                </span>
+
+                                <span class="menu__item-name">Invoices</span>
+                            </span>
+
+                            <span class="menu__icon menu__icon--small mr-2">
+                                <i class="las la-angle-right"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="menu__item">
+                        <a href="./" class="menu__link">
+                            <span class="menu__text">
+                                <span class="menu__icon menu__icon--medium">
+                                    <i class="las la-eraser"></i>
+                                </span>
+
+                                <span class="menu__item-name">Schedules</span>
+                            </span>
+
+                            <span class="menu__icon menu__icon--small mr-2">
+                                <i class="las la-angle-right"></i>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <section class="help">
+                <h1 class="help__title">Help Center</h1>
+                <h4 class="help__text">Having trouble in Finti.
+                    Please contact us for more questions.</h4>
+                <button class="help__button"><a href="" class="help__link">Go To Help Center</a></button>
+            </section>
+        </aside>
+
+        <main>
+            <header>
+                <div class="search">
+                    <span class="search__icon">
+                        <i class="las la-search"></i>
+                    </span>
+                    <input type="text" class="search__input" placeholder="Search..">
+                </div>
+                <div>
+                    <button class="button-icon">
+                        <i class="las la-file"></i>
+                    </button>
+                    <button class="button-icon">
+                        <i class="las la-inbox"></i>
+                    </button>
+                    <button class="button-icon">
+                        <i class="las la-ellipsis-v"></i>
+                    </button>
+                </div>
+                <div>
+                    <a class="link link--bold link--medium" href="">Wallet</a>
+                    <a class="link link--bold link--medium" href="">Invoce</a>
+                </div>
+                <div class="header-user">
+                    <h4 class="subtitle mr-4">Hi, Yevgeniy!</h4>
+                    <img class="avatar" src="https://via.placeholder.com/48" alt="">
+                </div>
+            </header>
+            <section class="cards">
+                <div class="cards__one">
+                    <div class="cards__text">
+                        <h5>Your Working Balance</h5>
+                        <a href="" class="cards__link">
+                            <span class="cards__item-name">
+                                Saving Account
+                            </span>
+                        </a>
+                    </div>
+                    <div class="cards__text">
+                        <h1>PKR 9,250,000</h1>
+                        <h5>PKR</h5>
+                    </div>
+                </div>
+                <div class="cards__two">
+
+                    <div class="cards__text">
+                        <h5>Your Saving Status</h5>
+                        <a href="" class="cards__link"><i class="las la-question-circle"></i></a>
+                    </div>
+                    <div class="cards__two-middle">
+                        <div class="cards__icon">
+                            <i class="las la-cube"></i>
+                        </div>
+                        <div>
+                            <h1 class="cards__text-red">4.28%</h1>
+                            <h5>Yuor spending increased</h5>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="cards__three">
+                    <div>
+                        <div class="cards__icon-green">
+                            <i class="lab la-cc-mastercard"></i>
+                        </div>
+                        <h5 class="cards__text-number">CARD NUMBER</h5>
+                        <h1 class="cards__number">3829 4820 4629 5025</h1>
+                    </div>
+                    <div class="cards__text">
+                        <div>
+                            <h5 class="cards__holder">CARD HOLDER NAME</h5>
+                            <h1 class="cards__name">Anita Rose</h1>
+                        </div>
+                        <div>
+                            <h5 class="cards__valid">Valid thru</h5>
+                            <h1 class="cards__date">09/17</h1>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="diagramme">
+                <div class="diagramme__item">
+                    <div class="diagramme__one">
+                        <h6 class="diagramme__text">Tasks in progress</h6>
+                        <div class="diagramme__digit">
+                            <h1 class="diagramme__meaning-red">210</h1>
+                            <h6 class="diagramme__fallrise diagramme__fallrise-green is-centred">23</h6>
+                        </div>
+                        <h6 class="diagramme__month">Current month</h6>
+                    </div>
+
+                    <div class="diagramme__char">
+                        <div class="diagramme__char-bar h60"></div>
+                        <div class="diagramme__char-bar h20"></div>
+                        <div class="diagramme__char-bar h40"></div>
+                        <div class="diagramme__char-bar diagramme__char-bar--orange"></div>
+                        <div class="diagramme__char-bar h70"></div>
+                        <div class="diagramme__char-bar h50"></div>
+                    </div>
+                </div>
+
+                <div class="diagramme__item">
+
+                    <div class="diagramme__one">
+                        <h6 class="diagramme__text">Tasks completed</h6>
+                        <div class="diagramme__digit">
+                            <h1 class="diagramme__meaning-purple">185</h1>
+                            <h6 class="diagramme__fallrise diagramme__fallrise-purple is-centred">45</h6>
+                        </div>
+                        <h6 class="diagramme__month">Current month</h6>
+                    </div>
+                    <div class="diagramme__char">
+                        <div class="diagramme__char-bar h20"></div>
+                        <div class="diagramme__char-bar h60"></div>
+                        <div class="diagramme__char-bar diagramme__char-bar--blue"></div>
+                        <div class="diagramme__char-bar h70"></div>
+                        <div class="diagramme__char-bar h40"></div>
+                        <div class="diagramme__char-bar h50"></div>
+                    </div>
+                </div>
+
+                <div class="diagramme__item">
+
+
+                    <div class="diagramme__one">
+                        <h6 class="diagramme__text">Monthly Tasks Summary</h6>
+                        <div class="diagramme__digit">
+                            <h1 class="diagramme__meaning-green">1.240</h1>
+                            <h6 class="diagramme__fallrise diagramme__fallrise-lightgreen is-centred">145</h6>
+                        </div>
+                        <h6 class="diagramme__month">Current month</h6>
+                    </div>
+                    <div class="diagramme__char">
+                        <div class="diagramme__char-bar h40"></div>
+                        <div class="diagramme__char-bar h60"></div>
+                        <div class="diagramme__char-bar h20"></div>
+                        <div class="diagramme__char-bar h70"></div>
+                        <div class="diagramme__char-bar diagramme__char-bar--green"></div>
+                        <div class="diagramme__char-bar h50"></div>
+
+                    </div>
+                </div>
+            </section>
+            <section class="transaction">
+                <div class="transaction_latest">
+
+                    <div class="transaction__lineone">
+                        <h3>Latest transactions</h3>
+                        <span class="search__icon">
+                            <i class="las la-sliders-h"></i>
+                            <i class="las la-search"></i>
+                        </span>
+                    </div>
+
+                    <div class="transaction__date">
+                        <h6 class="transaction__day">Mon, Mar 1</h6>
+                    </div>
+
+                    <div class="transaction__line">
+                        <span class="transaction__to">
+                            <img src="https://via.placeholder.com/48" alt="" class="transaction__img">
+                            <h5 class="transaction__text">Payment send to Sakir</h5>
+                        </span>
+                        <h5 class="is-red">$550.00</h5>
+                    </div>
+
+                    <div class="transaction__line">
+                        <span class="transaction__to">
+                            <img src="https://via.placeholder.com/48" alt="" class="transaction__img">
+                            <h5 class="transaction__text">Salary from Redwhale</h5>
+                        </span>
+                        <h5>$12,200.00</h5>
+                    </div>
+
+                    <div class="transaction__line">
+                        <span class="transaction__to">
+                            <img src="https://via.placeholder.com/48" alt="" class="transaction__img">
+                            <h5 class="transaction__text">Money Sent to Wise.com</h5>
+                        </span>
+                        <h5 class="is-red">$3,000.00</h5>
+                    </div>
+
+                    <div class="transaction__date">
+                        <h6 class="transaction__day">Mon, Mar 1</h6>
+                    </div>
+
+                    <div class="transaction__line">
+                        <span class="transaction__to">
+                            <img src="https://via.placeholder.com/48" alt="" class="transaction__img">
+                            <h5 class="transaction__text">Purchased Macbook Pro</h5>
+                        </span>
+                        <h5 class="is-red">$5,560.00</h5>
+                    </div>
+                </div>
+
+
+                <div class="transaction__up">
+
+                    <div class="transaction__lineone">
+                        <h3>Upcoming transactions</h3>
+                        <h6><a href="https://via.placeholder.com/48" class="link"> View all</a></h6>
+                    </div>
+
+                    <div class="transaction__date">
+                        <h6 class="transaction__day">Today</h6>
+                    </div>
+
+                    <div class="transaction__line">
+                        <span class="transaction__to">
+                            <img src="https://via.placeholder.com/48" alt="" class="transaction__img">
+                            <div class="transaction__up-mean">
+                                <h5 class="transaction__up-bill">Water Bill</h5>
+                                <h6 class="transaction__up-performance">Unsuccessfully</h6>
+                            </div>
+
+                        </span>
+                        <h5 class="is-red">-$220.00</h5>
+                    </div>
+
+                    <div class="transaction__date">
+                        <h6 class="transaction__day">Tomorrow</h6>
+                    </div>
+
+                    <div class="transaction__line">
+                        <span class="transaction__to">
+                            <img src="https://via.placeholder.com/48" alt="" class="transaction__img">
+                            <div class="transaction__up-mean">
+                                <h5 class="transaction__up-bill">Income: Salary Okt</h5>
+                                <h6 class="transaction__up-performance">Successfully</h6>
+                            </div>
+
+                        </span>
+                        <h5>+$1200.00</h5>
+                    </div>
+
+                    <div class="transaction__line">
+                        <span class="transaction__to">
+                            <img src="https://via.placeholder.com/48" alt="" class="transaction__img">
+                            <div class="transaction__up-mean">
+                                <h5 class="transaction__up-bill">Electric Bill</h5>
+                                <h6 class="transaction__up-performance">Successfully</h6>
+                            </div>
+
+                        </span>
+                        <h5 class="is-red">-$480.00</h5>
+                    </div>
+
+                    <div class="transaction__line">
+                        <span class="transaction__to">
+                            <img src="https://via.placeholder.com/48" alt="" class="transaction__img">
+                            <div class="transaction__up-mean">
+                                <h5 class="transaction__up-bill">Income: Jane transfers</h5>
+                                <h6 class="transaction__up-performance">Successfully</h6>
+                            </div>
+
+                        </span>
+                        <h5>+$500.00</h5>
+                    </div>
+
+                    <div class="transaction__line">
+                        <span class="transaction__to">
+                            <img src="https://via.placeholder.com/48" alt="" class="transaction__img">
+                            <div class="transaction__up-mean">
+                                <h5 class="transaction__up-bill">Income: Jane transfers</h5>
+                                <h6 class="transaction__up-performance">Successfully</h6>
+                            </div>
+
+                        </span>
+                        <h5>+$500.00</h5>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script>
+        function toggleMenu() {
+            var sidebar = document.querySelector('.sidebar');
+            var burger = document.querySelector('.burger');
+
+            sidebar.classList.toggle('sidebar--open');
+            burger.classList.toggle('burger--open');
+        }
+    </script>
+</body>
+
+</html>
