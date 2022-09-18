@@ -615,6 +615,64 @@
             .burger--open {
                 left: 330px;
             }
+
+            header {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                background: var(--main-bg);
+                height: 20vh;
+                margin: 0px 0 0 0;
+                padding: 0 40px 0 40px;
+                border-bottom: solid #e9e7f3 1px;
+                flex-wrap: wrap;
+                flex-direction: column;
+            }
+
+            .header-user {
+                font-size: 1.7rem;
+            }
+
+            .cards {
+                display: flex;
+                margin-top: 15px;
+                padding: 0 40px 0 40px;
+                flex-direction: column;
+                justify-content: space-around;
+                height: 600px;
+            }
+
+            .button {
+                display: none;
+            }
+
+            .link-id {
+                display: none;
+            }
+
+            .diagramme {
+                height: 479px;
+                margin: 40px 45px 0 44px;
+                border-top: solid #e9e7f3 1px;
+                border-bottom: solid #e9e7f3 1px;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .diagramme__item {
+                display: flex;
+                width: 300px;
+                justify-content: space-between;
+                margin-right: 10px;
+
+            }
+
+            .transaction {
+                display: flex;
+                justify-content: space-between;                
+                padding: 0 0 40px 0;
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -790,7 +848,7 @@
                     </span>
                     <input type="text" class="search__input" placeholder="Search..">
                 </div>
-                <div>
+                <div class="button">
                     <button class="button-icon">
                         <i class="las la-file"></i>
                     </button>
@@ -801,7 +859,7 @@
                         <i class="las la-ellipsis-v"></i>
                     </button>
                 </div>
-                <div>
+                <div class="link-id">
                     <a class="link link--bold link--medium" href="">Wallet</a>
                     <a class="link link--bold link--medium" href="">Invoce</a>
                 </div>
